@@ -1,4 +1,3 @@
-import 'package:book_shop_ui/screens/Detail/detail_screen.dart';
 import 'package:book_shop_ui/screens/Home/home_screen.dart';
 import 'package:flutter/material.dart';
 

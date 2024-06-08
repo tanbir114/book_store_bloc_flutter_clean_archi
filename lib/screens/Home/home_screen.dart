@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'widget/trendingcard.dart';
 import 'widget/trendingslider.dart';
 import 'widget/book_slider.dart';
 import 'widget/image_slider.dart';

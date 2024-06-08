@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
 import '../../../models/bookmodel.dart';
 import '../../Detail/detail_screen.dart'; // Import your detail screen file
 
 class BookSlider extends StatelessWidget {
-  const BookSlider({Key? key});
+  const BookSlider({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +22,7 @@ class BookSlider extends StatelessWidget {
           double rating = book.rating;
           int filledStars = rating.toInt();
           bool hasHalfStar = rating - filledStars >= 0.5;
+          int totalStars = 5;
 
           return GestureDetector(
             onTap: () {
@@ -56,30 +56,42 @@ class BookSlider extends StatelessWidget {
                   Text(
                     book.author,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 12),
+                    style: const TextStyle(fontSize: 12),
                   ),
-                  SizedBox(height: 4), // Add spacing
+                  const SizedBox(height: 4), // Add spacing
                   Text(
                     book.title,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
                   ),
                   Row(
-                    children: List.generate(
-                      filledStars,
-                      (index) => Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                        size: 12, // Adjust star size
+                    children: [
+                      ...List.generate(
+                        filledStars,
+                        (index) => const Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                          size: 15, // Adjust star size
+                        ),
                       ),
-                    )..addAll([
-                        if (hasHalfStar)
-                          Icon(
-                            Icons.star_half,
-                            color: Colors.amber,
-                            size: 12,
-                          ),
-                      ]),
+                      if (hasHalfStar)
+                        const Icon(
+                          Icons.star_half,
+                          color: Colors.amber,
+                          size: 15,
+                        ),
+                      ...List.generate(
+                        totalStars - filledStars - (hasHalfStar ? 1 : 0),
+                        (index) => const Icon(
+                          Icons.star_border,
+                          color: Colors.grey,
+                          size: 15, // Adjust star size
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
