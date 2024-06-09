@@ -21,14 +21,16 @@ class Trendingcard extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.white, width: 3.5), // White border
+                color: Colors.white,
+                border:
+                    Border.all(color: Colors.white, width: 3.5), // White border
                 borderRadius: BorderRadius.circular(12.0), // Circular corners
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
+                    color: Colors.black.withOpacity(0.3),
                     spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: Offset(0, 3), // changes position of shadow
+                    blurRadius: 2,
+                    // offset: Offset(0, 3), // changes position of shadow
                   ),
                 ],
               ),
@@ -42,7 +44,8 @@ class Trendingcard extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 16.0), // Add some spacing between the image and text
+            const SizedBox(
+                width: 16.0), // Add some spacing between the image and text
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +57,11 @@ class Trendingcard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 4.0),
-                  Text(book.description, maxLines: 2, overflow: TextOverflow.ellipsis,),
+                  Text(
+                    book.description,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                   const SizedBox(height: 8.0),
                   Row(
                     children: [
