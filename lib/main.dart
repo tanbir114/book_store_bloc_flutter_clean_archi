@@ -1,5 +1,7 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:book_shop_ui/screens/Home/home_screen.dart';
+import 'package:lottie/lottie.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: const SplashScreen(), // Show the splash screen first
+      home: const SplashScreen(),
     );
   }
 }
@@ -29,18 +31,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    // Navigate to HomeScreen after 3 seconds
-    Future.delayed(Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
-      );
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,42 +108,25 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.5),
-                          spreadRadius: -30,
-                          blurRadius: 35,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
+              child: AnimatedSplashScreen(
+                backgroundColor: Colors.transparent,
+                splash: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min, // Make the Column take minimum space
+                  children: [
+                    Flexible(
+                      child: LottieBuilder.asset(
+                        'assets/images/Animation - 1717949645274.json',
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        height: MediaQuery.of(context).size.height * 0.4,
+                      ),
                     ),
-                    child: Icon(
-                      Icons.book,
-                      size: 80,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    'Book',
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: Colors.white,
-                      shadows: [
-                        Shadow(
-                          offset: Offset(0, 3),
-                          blurRadius: 7,
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                  ],
+                ),
+                splashIconSize: MediaQuery.of(context).size.width * 0.6,
+                nextScreen: HomeScreen(),
+                splashTransition: SplashTransition.fadeTransition,
+                duration: 3000,
               ),
             ),
           ],
