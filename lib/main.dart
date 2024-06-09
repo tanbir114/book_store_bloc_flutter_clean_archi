@@ -1,5 +1,5 @@
-import 'package:book_shop_ui/screens/Home/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:book_shop_ui/screens/Home/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,7 +8,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,7 +16,168 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: const SplashScreen(), // Show the splash screen first
+    );
+  }
+}
+
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({Key? key}) : super(key: key);
+
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // Navigate to HomeScreen after 3 seconds
+    Future.delayed(Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromRGBO(153, 207, 118, .85),
+              Color.fromRGBO(153, 207, 118, .85),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Stack(
+          children: <Widget>[
+            Positioned(
+              top: 30,
+              left: 15,
+              child: GradientCircle(
+                diameter: 110,
+                gradient: const LinearGradient(
+                  colors: [
+                    Color.fromRGBO(153, 207, 118, .2),
+                    Color.fromRGBO(193, 224, 172, .7)
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+            ),
+            Positioned(
+              top: -70,
+              right: -240,
+              child: GradientCircle(
+                diameter: 400,
+                gradient: const LinearGradient(
+                  colors: [
+                    Color.fromRGBO(153, 207, 118, .2),
+                    Color.fromRGBO(193, 224, 172, .7)
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: -100,
+              left: -200,
+              child: GradientCircle(
+                diameter: 400,
+                gradient: const LinearGradient(
+                  colors: [
+                    Color.fromRGBO(153, 207, 118, .2),
+                    Color.fromRGBO(193, 224, 172, .7)
+                  ],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 10,
+              right: 10,
+              child: GradientCircle(
+                diameter: 70,
+                gradient: const LinearGradient(
+                  colors: [
+                    Color.fromRGBO(153, 207, 118, .2),
+                    Color.fromRGBO(193, 224, 172, .7)
+                  ],
+                  begin: Alignment.bottomRight,
+                  end: Alignment.topLeft,
+                ),
+              ),
+            ),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.5),
+                          spreadRadius: -30,
+                          blurRadius: 35,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: Icon(
+                      Icons.book,
+                      size: 80,
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    'Book',
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.white,
+                      shadows: [
+                        Shadow(
+                          offset: Offset(0, 3),
+                          blurRadius: 7,
+                          color: Colors.black.withOpacity(0.5),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class GradientCircle extends StatelessWidget {
+  final double diameter;
+  final Gradient gradient;
+
+  GradientCircle({required this.diameter, required this.gradient});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: diameter,
+      height: diameter,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: gradient,
+      ),
     );
   }
 }
