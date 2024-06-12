@@ -1,13 +1,17 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import '../../../models/bookmodel.dart';
 
+// ignore: must_be_immutable
 class Trendingcard extends StatelessWidget {
-  final Book book;
-  const Trendingcard({super.key, required this.book});
+  Map<String, dynamic> book;
+  Trendingcard({
+    super.key,
+    required this.book,
+  });
 
   @override
   Widget build(BuildContext context) {
-    double rating = book.rating;
+    double rating = book['rating'];
     int filledStars = rating.toInt();
     bool hasHalfStar = rating - filledStars >= 0.5;
     int totalStars = 5;
@@ -37,7 +41,7 @@ class Trendingcard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12.0), // Circular corners
                 child: Image.asset(
-                  book.imageUrl,
+                  book['imageUrl'],
                   width: 70, // Increased width
                   height: 100, // Increased height
                   fit: BoxFit.contain,
@@ -51,14 +55,14 @@ class Trendingcard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    book.title,
+                    book['title'],
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 4.0),
                   Text(
-                    book.description,
+                    book['description'],
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -97,7 +101,7 @@ class Trendingcard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  '\$${book.price.toStringAsFixed(2)}',
+                  '\$${book['price'].toStringAsFixed(2)}',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,

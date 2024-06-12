@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../models/bookmodel.dart';
+import '../../../../models/bookmodel.dart';
 import 'trendingcard.dart';
 
 class Trendingslider extends StatelessWidget {
@@ -12,7 +12,7 @@ class Trendingslider extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       itemCount: books.length,
       itemBuilder: (context, index) {
-        final book = books[index];
+        Map<String, dynamic> book = books[index];
         return Trendingcard(book: book);
       },
     );
